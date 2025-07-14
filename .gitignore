@@ -1,0 +1,40 @@
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Environment
+.env
+.env.*
+
+
+# OS-related files
+.DS_Store
+Thumbs.db
+
+# VSCode and IDE configs
+.vscode/
+.idea/
+
+# Virtual environment folders
+venv/
+env/
+.venv/
+
+
+
+# Log files
+*.log
+
+# FastAPI specific
+instance/
+*.db
+
+# Pydantic cache (optional)
+__pydantic_schema_cache__/
+
+# Uploads or temp folders (if any)
+uploads/
+temp/
