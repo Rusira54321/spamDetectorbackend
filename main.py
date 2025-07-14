@@ -12,7 +12,7 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:5173",
+        "https://spamdetectorfrontend-git-main-rusira-dinujayas-projects.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
