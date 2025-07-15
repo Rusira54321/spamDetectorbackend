@@ -68,7 +68,7 @@ def extract_spambase_features(text):
 def predict_spam(email: EmailInput):
     features = [extract_spambase_features(email.text)]
     prob_spam = model.predict_proba(features)[0][1]  # Confidence
-    threshold = 0.7
+    threshold = 0.75
     is_spam = int(prob_spam >= threshold)
 
     return {
