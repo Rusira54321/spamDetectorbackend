@@ -13,6 +13,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "https://spamdetectorfrontend-git-main-rusira-dinujayas-projects.vercel.app",
+"https://spamdetectorfrontend.vercel.app"
     ],
     allow_credentials=True,
     allow_methods=["*"],
