@@ -63,16 +63,15 @@ def extract_spambase_features(text):
     cap_features = [avg_cap_run, max_cap_run, total_cap_run]
     return word_features + char_features + cap_features
 
-
-
-
 @app.post("/predict")
 def predict_spam(email: EmailInput):
-    features = extract_spambase_features(email.text)
-    features_2d = [features]  # Convert list to 2D array for sklearn input
-    prediction = model.predict(features_2d)[0]
-    confidence = model.predict_proba(features_2d)[0][1]
+    features = [extract_spambase_features(email.text)]
+    prob_spam = model.predict_proba(features)[0][1]  # Confidence
+    threshold = 0.7
+    is_spam = int(prob_spam >= threshold)
+
     return {
-        "prediction": "spam" if prediction == 1 else "not spam",
-        "confidence": round(confidence, 2)
+        "prediction": "spam" if is_spam else "not spam"
     }
+
+
