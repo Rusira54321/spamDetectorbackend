@@ -5,7 +5,7 @@ from pydantic import BaseModel
 import joblib
 from starlette.middleware.cors import CORSMiddleware
 
-model = joblib.load("logistic_model.pkl")
+model = joblib.load("logistic_model1.pkl")
 # Actual prediction route
 app = FastAPI()
 
@@ -27,16 +27,15 @@ class EmailInput(BaseModel):
 
 # --- WORDS from SpamBase (first 48 features)
 word_list = [
-    'make', 'address', 'all', '3d', 'our', 'over', 'remove', 'internet', 'order',
-    'mail', 'receive', 'will', 'people', 'report', 'addresses', 'free', 'business',
-    'email', 'you', 'credit', 'your', 'font', '000', 'money', 'hp', 'hpl', 'george',
+    'make', 'all', 'our', 'over', 'remove', 'internet', 'order',
+    'mail', 'receive', 'people', 'addresses', 'free', 'business',
+    'email', 'you', 'credit', 'your', '000', 'money', 'hp', 'hpl', 'george',
     '650', 'lab', 'labs', 'telnet', '857', 'data', '415', '85', 'technology', '1999',
-    'parts', 'pm', 'direct', 'cs', 'meeting', 'original', 'project', 're', 'edu', 'table',
-    'conference'
+    'pm', 'meeting', 'original','re', 'edu'
 ]
 
 # --- CHARACTERS from SpamBase (next 6 features)
-char_list = [';', '(', '[', '!', '$', '#']
+char_list = ['!', '$']
 
 # --- Function to calculate word frequency
 def word_freq(text, word):
@@ -68,7 +67,7 @@ def extract_spambase_features(text):
 def predict_spam(email: EmailInput):
     features = [extract_spambase_features(email.text)]
     prob_spam = model.predict_proba(features)[0][1]  # Confidence
-    threshold = 0.6
+    threshold = 0.55
     is_spam = int(prob_spam >= threshold)
 
     return {
